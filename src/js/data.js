@@ -372,4 +372,19 @@ function filterBySystem(fieldValue) {
     return fieldValue == value;
   }
 }
+
+function calcSum(view, fieldName) {
+  var sum = 0;
+  var count = 0;
+  var iter = view.getIterator();
+  while (iter.advance()) {
+    count++;
+    sum += iter.get(fieldName);
+  }
+  return sum;
+}
+
+function calcAvg(view, fieldName) {
+  return calcSum(view, fieldName) / view.getIterator().getRowsCount();
+}
 // Utility functions for data ->
