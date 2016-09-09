@@ -24,9 +24,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
+
                     <h2>System Availability
                         <span class="text-muted">(last 30 days)</span>
-                        <span class="pull-right" id="systemAvailabilityLegend"></span>
+                        <span class="pull-right legend-block" id="systemAvailabilityLegend"></span>
                     </h2>
                     <table class="table table-condensed">
                         <tr>
@@ -36,6 +37,42 @@
                         </tr>
                         <tbody id="systemAvailabilityTable"></tbody>
                     </table>
+
+                    <h2>Hardware % of Capacity
+                        <span class="pull-right legend-block" id="hardwareOfCapacityLegend"></span>
+                    </h2>
+                    <table class="table table-condensed">
+                        <tbody id="hardwareOfCapacityTable">
+                            <tr>
+                                <td>CPU</td>
+                                <td>Today</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableLine0"></div></td>
+                                <td>Overall</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableBullet0"></div></td>
+                                <td id="hardwareOfCapacityTableAverage0"></td>
+                            </tr>
+                            <tr>
+                                <td>Storage</td>
+                                <td>Last 12 months</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableLine1"></div></td>
+                                <td>Today</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableBullet1"></div></td>
+                                <td id="hardwareOfCapacityTableAverage1"></td>
+                            </tr>
+                            <tr>
+                                <td>Network</td>
+                                <td>Last 12 months</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableLine2"></div></td>
+                                <td>Today</td>
+                                <td><div class="narrow_container" id="hardwareOfCapacityTableBullet2"></div></td>
+                                <td id="hardwareOfCapacityTableAverage2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Daily Network Traffic <span class="text-muted">(kilobytes)</span></h2>
+                    <!--<p><span class="pull-right legend-block" id="dailyNetworkTrafficLegend"></span></p>-->
+                    <div id="dailyNetworkTrafficChart"></div>
                 </div>
                 <div class="col-md-6">
 
