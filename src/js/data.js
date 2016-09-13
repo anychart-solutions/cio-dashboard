@@ -1,4 +1,3 @@
-
 var SARawData = [
   ['Network', Date.UTC(2013, 10), 98.6],
   ['Network', Date.UTC(2013, 11), 98.5],
@@ -301,14 +300,6 @@ var MPMData = [
   ['Web site face-lift', 'Move into production', Date.UTC(2014, 9, 22)]
 ];
 
-// Some Projects for TPQ report. Columns are ['Project', 'Status', 'Funding approved', 'Schedule start']
-var TPQData = [
-  ['Professional service module', 'Pending available staff', true, Date.UTC(2014, 9, 22)],
-  ['Upgrade MS Office', 'Cost-benefit analysis', false, Date.UTC(2014, 11, 1)],
-  ['Failover for ERP', 'Preparing proposal', false, Date.UTC(2015, 0, 30)],
-  ['Upgrade data warehouse HW', 'Evaluating options', true, Date.UTC(2015, 1, 13)],
-  ['Executive dashboard', 'Vendor assessment', false, Date.UTC(2015, 4, 2)]
-];
 
 
 
@@ -386,5 +377,13 @@ function calcSum(view, fieldName) {
 
 function calcAvg(view, fieldName) {
   return calcSum(view, fieldName) / view.getIterator().getRowsCount();
+}
+
+function getLastFieldValue(view, fieldName) {
+  var iterator = view.getIterator();
+  if (iterator.select(iterator.getRowsCount() - 1))
+    return iterator.get(fieldName);
+  else
+    return undefined;
 }
 // Utility functions for data ->

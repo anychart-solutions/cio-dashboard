@@ -1,24 +1,13 @@
-.anychart-credits {
-    display: none;
-}
-
-html {
-    height: 100%;
-}
-
+html {height: 100%;}
 body {
     font-family: 'Verdana', Helvetica, Arial, sans-serif;
     height: 100%;
-    background: #fff;
     color: #7c868e;
     font-size: 12px
 }
-p.credits{
-    padding: 10px 0 0 0;
-}
-p, th{
-    font-size: 13px
-}
+.container-fluid{max-width: 1400px;  }
+p.credits{padding: 10px 0 0 0;}
+
 h1{
     font-size: 18px;
     padding: 0 0 5px 0;
@@ -37,11 +26,14 @@ h2{
     color: #e65100;
     font-weight: normal;
 }
+h2.underline{
+    border-bottom: 2px solid #EAEAEA;
+}
 h2 .text-muted{
     font-size: 14px;
     color: #7c868e
 }
-i.fa.fa-circle{
+.fa.fa-circle{
     color: #e65100
 }
 .table>tbody>tr>th{
@@ -57,15 +49,14 @@ i.fa.fa-circle{
 }
 .narrow_container{
     height: 30px;
+    max-width: 190px;
+}
+.small_container{
+    height: 20px;
+    max-width: 100px;
 }
 .legend-block{
     display: inline-block;
     height: 20px;
-    width: 310px
-}
-
-@media print {
-    .no-print, .no-print * {
-        display: none !important;
-    }
+    width: 260px
 }

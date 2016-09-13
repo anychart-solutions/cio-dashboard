@@ -1,4 +1,4 @@
-anychart.onDocumentReady(function () {
+$(function () {
 
   function vRect(path, size) {
     path.clear();
@@ -6,44 +6,45 @@ anychart.onDocumentReady(function () {
     var y = Math.round(size / 2);
     var height = size * 0.8;
     path.clear()
-        .moveTo(x - 2, y - height / 2)
-        .lineTo(x - 2, y + height / 2)
-        .lineTo(x + 3, y + height / 2)
-        .lineTo(x + 3, y - height / 2)
+        .moveTo(x - 2, y - height / 2 - 1)
+        .lineTo(x - 2, y + height / 2 - 1)
+        .lineTo(x + 2, y + height / 2 - 1)
+        .lineTo(x + 2, y - height / 2 - 1)
         .close();
   }
 
-  var drawLegend = function (container_id, items) {
+  function drawLegend (container_id, items) {
     var legend = anychart.ui.legend();
     legend.fontSize('11px');
     legend.items(items);
+    legend.iconTextSpacing(0);
     legend.align('right');
-    legend.position('rightCenter');
+    legend.vAlign('bottom');
+    legend.position('rightBottom');
+    legend.itemsSpacing(2);
     legend.container(container_id);
     legend.draw();
-  };
+  }
 
+  function drawLineChart(container_id, data, ranges) {
+    var sparkLine = anychart.sparkline(data);
+    if (ranges) sparkLine.rangeMarker(0).from(ranges[0]).to(ranges[1]);
+    sparkLine.container(container_id);
+    sparkLine.draw();
+  }
 
-  var drawLineChart = function (container_id, data, ranges) {
-    var sparkline = anychart.sparkline(data);
-    if (ranges) sparkline.rangeMarker(0).from(ranges[0]).to(ranges[1]);
-    sparkline.container(container_id);
-    sparkline.draw();
-  };
-
-  var drawBulletChart = function(container_id, value, scale, ranges) {
-    var bullet = anychart.bullet([{'value': value, 'type': 'bar', 'gap': 0.7}]);
+  function drawBulletChart(container_id, value, scale, ranges) {
+    var bullet = anychart.bullet([{'value': value, 'type': 'bar', 'gap': 0.7, stroke: null, fill: '#1976d2'}]);
     bullet.scale(scale);
     bullet.range(0).from(ranges[0]).to(ranges[1]).fill('#E6E6E6');
     bullet.range(1).from(ranges[1]).to(ranges[2]).fill('#D6D6D6');
     bullet.range(2).from(ranges[2]).to(ranges[3]).fill('#B8B8B8');
     bullet.container(container_id);
     bullet.draw();
-  };
+  }
 
-
-  var drawBulletLightChart = function(container_id, scale, value, rangeValue){
-    var bullet = anychart.bullet([{'value': value, 'type': 'line', 'gap': 0.4}]);
+  function drawBulletLightChart(container_id, scale, value, rangeValue){
+    var bullet = anychart.bullet([{'value': value, 'type': 'line', fill: '#1976d2', stroke: '#1976d2', 'gap': 0.4}]);
     bullet.scale(scale).padding(0).margin(0);
     bullet.range(0).from(rangeValue).to(100).fill('#D6D6D6');
     bullet.axis().enabled(false);
@@ -53,14 +54,14 @@ anychart.onDocumentReady(function () {
     bullet.background().enabled(true).stroke('#D6D6D6');
     bullet.container(container_id);
     bullet.draw();
-  };
+  }
 
 
-  function fillSystemAvailabilityTable(container_id, rawData, mainData){
+  function fillSystemAvailabilityTable(rawData, mainData){
     var rawView = anychart.data.set(rawData).mapAs({'System': [0], 'Availability': [2], 'x': [1], 'value': [2]});
     var bulletScale = anychart.scales.linear().minimum(85).maximum(100);
     drawLegend('systemAvailabilityLegend', [
-      {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#64b5f6'},
+      {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#1976d2'},
       {'index': 1, 'text': 'Acceptable', 'iconType': vRect, 'iconFill': '#D6D6D6'}
     ]);
 
@@ -69,20 +70,8 @@ anychart.onDocumentReady(function () {
       var availability = mainData[i][1];
       var systemData = rawView.filter('System', filterBySystem(system));
       var avgAvailability = calcAvg(systemData, 'Availability');
-
-      var $marker = '';
-      if (avgAvailability < availability) $marker = '<i class="fa fa-circle"></i>';
-
-      $('#' + container_id).append('<tr>' +
-        '<td> <div class="narrow_container" id="line_' + container_id + i + '"></div></td>' +
-        '<td>' + $marker + '</td>' +
-        '<td>' + system + '</td>' +
-        '<td> <div class="narrow_container" id="bullet_' + container_id + i + '"></div></td>' +
-        '<td>' + availability.toFixed(1) + '%</td>' +
-      '</tr>');
-
-      drawLineChart("line_" + container_id + i, systemData, false);
-      drawBulletLightChart("bullet_" + container_id + i, bulletScale, avgAvailability, availability);
+      drawLineChart("systemAvailabilityLine" + i, systemData, false);
+      drawBulletLightChart("systemAvailabilityBullet" + i, bulletScale, avgAvailability, availability);
     }
   }
 
@@ -92,7 +81,7 @@ anychart.onDocumentReady(function () {
     bulletScale.minorTicks().count(3);
 
     drawLegend('hardwareOfCapacityLegend', [
-      {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#64b5f6'},
+      {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#1976d2'},
       {'index': 1, 'text': 'Good', 'iconType': vRect, 'iconFill': '#E6E6E6'},
       {'index': 2, 'text': 'Acceptable', 'iconType': vRect, 'iconFill': '#D6D6D6'},
       {'index': 3, 'text': 'Critical', 'iconType': vRect, 'iconFill': '#B8B8B8'}
@@ -118,9 +107,15 @@ anychart.onDocumentReady(function () {
     chart.interactivity().hoverMode('byX');
     chart.tooltip().displayMode('union');
     
-    chart.line(sixMonthsData).name('Daily mean for last 6 month');
-    chart.line(weekData).name('Daily mean for last 7 days');
-    chart.line(yesterdayData).name('Yesterday');
+    var series_1 = chart.line(sixMonthsData).name('Daily mean for last 6 month');
+    series_1.legendItem({'iconType': vRect});
+    series_1.hoverMarkers(false);
+    var series_2 = chart.line(weekData).name('Daily mean for last 7 days');
+    series_2.legendItem({'iconType': vRect});
+    series_2.hoverMarkers(false);
+    var series_3 = chart.line(yesterdayData).name('Yesterday');
+    series_3.legendItem({'iconType': vRect});
+    series_3.hoverMarkers(false);
 
     var xAxisScale = anychart.scales.dateTime();
     xAxisScale.minimum(Date.UTC(0, 0, 1, 0));
@@ -143,7 +138,6 @@ anychart.onDocumentReady(function () {
       else if (hour == 12) return h + '\nPM';
       else return h;
     });
-
     var topAxis = chart.xAxis(1);
     topAxis.orientation('top');
     topAxis.ticks().enabled(false);
@@ -155,23 +149,79 @@ anychart.onDocumentReady(function () {
       return (value['tickValue'] / 1000).toFixed(0) + 'K';
     });
     chart.grid().scale(xAxisScale).layout('vertical');
-
-    //var legend = chart.legend();
-    //legend.enabled(true)
-    //  .fontSize(10)
-    //  .fontColor(normalFontColor)
-    //  .tooltip(false)
-    //  .align('right')
-    //  .padding(0)
-    //  .margin(3, 0, 5);
-    //legend.paginator().enabled(false);
+    chart.legend().enabled(true).align('right').fontSize(11).itemsSpacing(2).iconTextSpacing(0);
     chart.container(container_id);
     chart.draw();
   }
 
+  function fillKeyNonMetricsTable(expensesData, satisfactionData, problemsData, budgetTarget, satisfactionRanges, problemsRanges, expensesRanges, problemsTarget){
+    drawLegend('keyNonMetricsLegend', [
+      {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#1976d2'},
+      {'index': 1, 'text': 'Good', 'iconType': vRect, 'iconFill': '#E6E6E6'},
+      {'index': 2, 'text': 'Acceptable', 'iconType': vRect, 'iconFill': '#D6D6D6'},
+      {'index': 3, 'text': 'Critical', 'iconType': vRect, 'iconFill': '#B8B8B8'}
+    ]);
+    var bulletScale = anychart.scales.linear().minimum(0).maximum(150);
+    var views = [
+      anychart.data.set(expensesData).mapAs(),
+      anychart.data.set(satisfactionData).mapAs(),
+      anychart.data.set(problemsData).mapAs()
+    ];
+    var actualExpenses = calcSum(views[0], 'value');
+    var actualSatisfaction = getLastFieldValue(views[1], 'value');
+    var actualProblems = calcAvg(views[2], 'value');
+    var actualValues = [
+      actualExpenses / (budgetTarget / expensesData.length * 12) * 100,
+      actualSatisfaction,
+      actualProblems
+    ];
+    var rangesForLines = [
+      [0, budgetTarget / 12],
+      [satisfactionRanges[0], satisfactionRanges[1]],
+      [problemsRanges[0] / 100 * problemsTarget, problemsRanges[2] / 100 * problemsTarget]
+    ];
+    var ranges_list = [expensesRanges, satisfactionRanges, problemsRanges, budgetTarget];
+    for (var i = 0; i < 3; i++) {
+      var ranges = ranges_list[i];
+      drawLineChart('keyNonMetricsLine' + i, views[i], rangesForLines[i]);
+      drawBulletChart('keyNonMetricsBullet' + i, actualValues[i], bulletScale, ranges)
+    }
+  }
 
-  fillSystemAvailabilityTable('systemAvailabilityTable', SARawData, SAAcceptedAvailability);
+  function fillMajorProjectMilestonesTable(data){
+    var view = anychart.data.set(data).mapAs({'Project': [0], 'Milestone': [1], 'Due': [2]});
+    var iterator = view.getIterator();
+    var bulletScale = anychart.scales.linear().minimum(-20).maximum(20);
+
+    var i = 0;
+    while (iterator.advance()) {
+      var dueDate = new Date(iterator.get('Due'));
+      var diff = getDiffInDays(Today, dueDate);
+      var bullet = anychart.bullet([{
+        'value': diff,
+        'type': 'bar',
+        'gap': 0.2,
+        'stroke': null,
+        'fill': ((diff >= 0) ? '#D6D6D6' : '#1976d2')
+      }]);
+      bullet.scale(bulletScale).padding(0).margin(0);
+      i++;
+      bullet.container('majorProjectMilestonesBar' + i);
+      bullet.draw();
+    }
+    var axis = anychart.axes.linear();
+    axis.orientation('bottom');
+    axis.labels().fontSize('9px').padding(0);
+    axis.scale(bulletScale);
+    axis.minorTicks(false);
+    axis.padding([0,5,0,5]);
+    axis.container('majorProjectMilestonesScale');
+    axis.draw()
+  }
+
+  fillSystemAvailabilityTable(SARawData, SAAcceptedAvailability);
   fillHardwareOfCapacityTable(HCCPUData, HCStorage, HCNetwork, HCCPURanges, HCNetworkRanges, HCStorageRanges);
   fillDailyNetworkTrafficChart('dailyNetworkTrafficChart', DNT6MonthAvgData, DNTWeekAvgData, DNTYesterdayData);
-
+  fillKeyNonMetricsTable(KNSMExpensesData, KNSMSatisfactionData, KNSMProblemsData, KNSMBudgetTarget, KNSMSatisfactionRanges, KNSMProblemsRanges, KNSMExpensesRanges, KNSMProblemsTarget);
+  fillMajorProjectMilestonesTable(MPMData);
 });
