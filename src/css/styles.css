@@ -41,6 +41,7 @@ h2 .text-muted{
     border-bottom: 2px solid #EAEAEA;
     font-weight: normal;
     color: #212121;
+    vertical-align: bottom;
 }
 .table>tbody>tr>td{
     padding: 2px 5px;
@@ -49,7 +50,6 @@ h2 .text-muted{
 }
 .narrow_container{
     height: 30px;
-    max-width: 190px;
 }
 .small_container{
     height: 20px;

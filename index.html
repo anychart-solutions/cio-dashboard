@@ -4,22 +4,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>CIO Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css"  href="src/vendors/bootstrap-3/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css"  href="src/vendors/font-awesome-4.4.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" type="text/css"  href="src/css/styles.css"/>
+        <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link rel="stylesheet" type="text/css"  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
         <link rel="stylesheet" type="text/css"  href="http://cdn.anychart.com/css/7.11.1/anychart-ui.min.css"/>
+
+        <link rel="stylesheet" type="text/css"  href="src/css/styles.css"/>
     </head>
     <body>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <p class="credits">This sample is based on the dashboard sample in
-                        "Information Dashboard Design: Displaying Data for At-a-Glance Monitoring" by Stephen Few
-                    <h1>CIO Dashboard
-                    <span class="text-muted pull-right">(As of September 9, 2016)</span>
-                </h1>
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-6">
                     <h2>System Availability
@@ -223,42 +215,42 @@
                             <th></th>
                             <th>Project</th>
                             <th>Status</th>
-                            <th>Approved</th>
+                            <th class="text-center">Approved</th>
                             <th>Sched.Stat</th>
                         </tr>
                         <tr>
                             <td>1</td>
                             <td>Professional service module</td>
                             <td>Pending available staff</td>
-                            <td>X</td>
+                            <td class="text-center">X</td>
                             <td>09/22/2014</td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>Upgrade MS Office</td>
                             <td>Cost-benefit analysis</td>
-                            <td></td>
+                            <td class="text-center"></td>
                             <td>01/11/2014</td>
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Failover for ERP</td>
                             <td>Preparing proposal</td>
-                            <td></td>
+                            <td class="text-center"></td>
                             <td>01/30/2015</td>
                         </tr>
                         <tr>
                             <td>4</td>
                             <td>Upgrade data warehouse HW</td>
                             <td>Evaluating options</td>
-                            <td>X</td>
+                            <td class="text-center">X</td>
                             <td>01/02/2015</td>
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>Executive dashboard</td>
                             <td>Vendor assessment</td>
-                            <td></td>
+                            <td class="text-center"></td>
                             <td>05/02/2015</td>
                         </tr>
                     </table>
@@ -267,9 +259,10 @@
             <div class="clearfix"></div>
         </div>
     </body>
-<script src="src/vendors/jquery/jquery-2.1.3.min.js"></script>
-<script src="src/vendors/bootstrap-3/bootstrap.min.js"></script>
-<script src="src/vendors/anychart/anychart-bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="http://cdn.anychart.com/js/latest/anychart.min.js"></script>
+
 <script src="src/js/data.js"></script>
 <script src="src/js/main.js"></script>
 </html>

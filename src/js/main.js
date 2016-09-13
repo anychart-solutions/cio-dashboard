@@ -29,6 +29,9 @@ $(function () {
   function drawLineChart(container_id, data, ranges) {
     var sparkLine = anychart.sparkline(data);
     if (ranges) sparkLine.rangeMarker(0).from(ranges[0]).to(ranges[1]);
+    sparkLine.padding(0);
+    sparkLine.xScale('dateTime');
+    sparkLine.xScale().minimumGap(0).maximumGap(0).ticks([]).minorTicks([]);
     sparkLine.container(container_id);
     sparkLine.draw();
   }
