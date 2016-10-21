@@ -1,4 +1,4 @@
-$(function () {
+(function () {
 
     function vRect(path, size) {
         path.clear();
@@ -228,17 +228,17 @@ $(function () {
         axis.draw()
     }
 
-    function hidePreloader() {
-        $('#loader-wrapper').fadeOut('slow');
-    }
-
     fillSystemAvailabilityTable(SARawData, SAAcceptedAvailability);
     fillHardwareOfCapacityTable(HCCPUData, HCStorage, HCNetwork, HCCPURanges, HCNetworkRanges, HCStorageRanges);
     fillDailyNetworkTrafficChart('dailyNetworkTrafficChart', DNT6MonthAvgData, DNTWeekAvgData, DNTYesterdayData);
     fillKeyNonMetricsTable(KNSMExpensesData, KNSMSatisfactionData, KNSMProblemsData, KNSMBudgetTarget, KNSMSatisfactionRanges, KNSMProblemsRanges, KNSMExpensesRanges, KNSMProblemsTarget);
     fillMajorProjectMilestonesTable(MPMData);
+})();
 
-   /* $(window).on('load', function () {
-        hidePreloader();
-    });*/
+function hidePreloader() {
+    $('#loader-wrapper').fadeOut('slow');
+}
+
+$(window).on('load', function () {
+    hidePreloader();
 });
