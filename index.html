@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>CIO Dashboard</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <link rel="icon" href="src/i/anychart.ico">
 
     <link rel="stylesheet" type="text/css" href="src/vendors/bootstrap-3/bootstrap.min.css"/>
@@ -112,12 +113,351 @@
     </div>
 </div>
 </body>
+=======
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="http://cdn.anychart.com/css/7.11.1/anychart-ui.min.css"/>
 
-<script src="src/vendors/jquery/jquery-2.1.3.min.js"></script>
-<script src="src/vendors/bootstrap-3/bootstrap.min.js"></script>
-<script src="https://cdn.anychart.com/js/7.11.1/anychart-bundle.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="src/css/styles.css"/>
+</head>
+<body>
+<div id="loader-wrapper" class="anychart-loader">
+    <div class="rotating-cover">
+        <div class="rotating-plane">
+            <div class="chart-row"><span class="chart-col green"></span><span class="chart-col orange"></span><span
+                    class="chart-col red"></span></div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>System Availability
+                <span class="text-muted">(last 30 days)</span>
+                <span class="pull-right legend-block" id="systemAvailabilityLegend" style="width: 200px"></span>
+            </h2>
+            <table class="table table-condensed">
+                <tr>
+                    <th colspan="2">Last 12 Month</th>
+                    <th>System</th>
+                    <th colspan="2" class="text-right">Availability %</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine0"></div>
+                    </td>
+                    <td></td>
+                    <td>Network</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet0"></div>
+                    </td>
+                    <td>99.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine1"></div>
+                    </td>
+                    <td></td>
+                    <td>ERP</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet1"></div>
+                    </td>
+                    <td>98.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine2"></div>
+                    </td>
+                    <td><i class="fa fa-circle"></i></td>
+                    <td>Data Warehouse</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet2"></div>
+                    </td>
+                    <td>98.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine3"></div>
+                    </td>
+                    <td></td>
+                    <td>Web Site</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet3"></div>
+                    </td>
+                    <td>98.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine4"></div>
+                    </td>
+                    <td></td>
+                    <td>Email</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet4"></div>
+                    </td>
+                    <td>98.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine5"></div>
+                    </td>
+                    <td></td>
+                    <td>HR</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet5"></div>
+                    </td>
+                    <td>96.0%</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityLine6"></div>
+                    </td>
+                    <td></td>
+                    <td>Problem Tracking</td>
+                    <td>
+                        <div class="narrow_container" id="systemAvailabilityBullet6"></div>
+                    </td>
+                    <td>93.0%</td>
+                </tr>
+
+            </table>
+
+            <h2 class="underline">Hardware % of Capacity
+                <span class="pull-right legend-block" id="hardwareOfCapacityLegend"></span>
+                <div class="clearfix"></div>
+            </h2>
+            <table class="table table-condensed">
+                <tbody id="hardwareOfCapacityTable">
+                <tr>
+                    <td>CPU</td>
+                    <td>Today</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableLine0"></div>
+                    </td>
+                    <td>Overall</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableBullet0"></div>
+                    </td>
+                    <td id="hardwareOfCapacityTableAverage0"></td>
+                </tr>
+                <tr>
+                    <td>Storage</td>
+                    <td>Last 12 months</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableLine1"></div>
+                    </td>
+                    <td>Today</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableBullet1"></div>
+                    </td>
+                    <td id="hardwareOfCapacityTableAverage1"></td>
+                </tr>
+                <tr>
+                    <td>Network</td>
+                    <td>Last 12 months</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableLine2"></div>
+                    </td>
+                    <td>Today</td>
+                    <td>
+                        <div class="narrow_container" id="hardwareOfCapacityTableBullet2"></div>
+                    </td>
+                    <td id="hardwareOfCapacityTableAverage2"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <h2 class="underline">Daily Network Traffic <span class="text-muted">(kilobytes)</span></h2>
+            <div id="dailyNetworkTrafficChart"></div>
+        </div>
+        <div class="col-sm-6">
+            <h2>Key Non-System Metrics
+                <span class="pull-right legend-block" id="keyNonMetricsLegend"></span>
+            </h2>
+            <table class="table table-condensed">
+                <tr>
+                    <th>Year-to-Date</th>
+                    <th></th>
+                    <th>Metric</th>
+                    <th>% of Target</th>
+                    <th>Actual</th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsLine0"></div>
+                    </td>
+                    <td></td>
+                    <td>Expenses YTD</td>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsBullet0"></div>
+                    </td>
+                    <td>$984.0K</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsLine1"></div>
+                    </td>
+                    <td><i class="fa fa-circle"></i></td>
+                    <td>Customer Satisfaction</td>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsBullet1"></div>
+                    </td>
+                    <td>97/100</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsLine2"></div>
+                    </td>
+                    <td></td>
+                    <td>Level 1 Problems</td>
+                    <td>
+                        <div class="narrow_container" id="keyNonMetricsBullet2"></div>
+                    </td>
+                    <td>88</td>
+                </tr>
+            </table>
+
+            <h2>Major Project Milestones
+                <span class="text-muted">(by priority)</span>
+            </h2>
+            <table class="table table-condensed" style="margin-bottom: 5px">
+                <tr>
+                    <th></th>
+                    <th>Project</th>
+                    <th>Milestone</th>
+                    <th>Days Until/<br/>Past Due</th>
+                    <th>Due Date</th>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>ERP Upgrade</td>
+                    <td>Full system test</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar1"></div>
+                    </td>
+                    <td>10/24/14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Add services data to DW</td>
+                    <td>ETL coding</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar2"></div>
+                    </td>
+                    <td>10/10/14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Upgrade mainframe OS</td>
+                    <td>Prepare plan</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar3"></div>
+                    </td>
+                    <td>10/17/14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Disaster recovery site</td>
+                    <td>Install hardware</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar4"></div>
+                    </td>
+                    <td>10/20/14</td>
+                </tr>
+                <tr>
+                    <td><i class="fa fa-circle"></i></td>
+                    <td>Budgeting system</td>
+                    <td>Hire team</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar5"></div>
+                    </td>
+                    <td>10/02/14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Web site face-lift</td>
+                    <td>Move into production</td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesBar6"></div>
+                    </td>
+                    <td>10/22/14</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <div class="small_container" id="majorProjectMilestonesScale"></div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+
+            <h2>5 Top Projects in the Queue</h2>
+            <table class="table table-condensed">
+                <tr>
+                    <th></th>
+                    <th>Project</th>
+                    <th>Status</th>
+                    <th class="text-center">Approved</th>
+                    <th>Sched.Stat</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Professional service module</td>
+                    <td>Pending available staff</td>
+                    <td class="text-center">X</td>
+                    <td>09/22/2014</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Upgrade MS Office</td>
+                    <td>Cost-benefit analysis</td>
+                    <td class="text-center"></td>
+                    <td>01/11/2014</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Failover for ERP</td>
+                    <td>Preparing proposal</td>
+                    <td class="text-center"></td>
+                    <td>01/30/2015</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Upgrade data warehouse HW</td>
+                    <td>Evaluating options</td>
+                    <td class="text-center">X</td>
+                    <td>01/02/2015</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Executive dashboard</td>
+                    <td>Vendor assessment</td>
+                    <td class="text-center"></td>
+                    <td>05/02/2015</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+<script src="http://cdn.anychart.com/js/latest/anychart.min.js"></script>
+>>>>>>> c9dacf8ce7ee54426d6236a13020a080d319a10d
+
 <script src="src/js/data.js"></script>
+<<<<<<< HEAD
 <script src="src/js/dashboard.js"></script>
+=======
+<script src="src/js/main.js"></script>
+>>>>>>> c9dacf8ce7ee54426d6236a13020a080d319a10d
 
 <!-- This library enables the automatic resizing of the height and width of
 both same and cross domain iFrames to fit their contained content.   -->
