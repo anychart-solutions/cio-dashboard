@@ -3,7 +3,7 @@
 ## CIO Dashboard
 This sample is based on the dashboard sample in ["Information Dashboard Design: Displaying Data for At-a-Glance Monitoring" by Stephen Few](https://www.amazon.com/Information-Dashboard-Design-At-Glance/dp/1938377001).
 
-[<img src="http://static.anychart.com/images/github/cio-dashboard.png?1" alt="CIO Dashboard | AnyChart">](http://anychart.com/solutions/cio-dashboard-solution/)
+[<img src="https://static.anychart.com/images/github/cio-dashboard.png?1" alt="CIO Dashboard | AnyChart">](http://anychart.com/solutions/cio-dashboard-solution/)
 
 ## Links
 * [CIO Dashboard at AnyChart.Com](https://www.anychart.com/solutions/cio-dashboard-solution/)
