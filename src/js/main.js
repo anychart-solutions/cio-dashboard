@@ -14,13 +14,13 @@
     }
 
     function drawLegend(container_id, items) {
-        var legend = anychart.ui.legend();
+        var legend = anychart.standalones.legend();
         legend.fontSize('11px');
         legend.items(items);
         legend.iconTextSpacing(0);
         legend.align('right');
         legend.vAlign('bottom');
-        legend.position('rightBottom');
+        legend.position('right-bottom');
         legend.itemsSpacing(2);
         legend.container(container_id);
         legend.draw();
@@ -30,7 +30,7 @@
         var sparkLine = anychart.sparkline(data);
         if (ranges) sparkLine.rangeMarker(0).from(ranges[0]).to(ranges[1]);
         sparkLine.padding(0);
-        sparkLine.xScale('dateTime');
+        sparkLine.xScale('date-time');
         sparkLine.xScale().minimumGap(0).maximumGap(0).ticks([]).minorTicks([]);
         sparkLine.container(container_id);
         sparkLine.draw();
@@ -67,7 +67,7 @@
 
 
     function fillSystemAvailabilityTable(rawData, mainData) {
-        var rawView = anychart.data.set(rawData).mapAs({'System': [0], 'Availability': [2], 'x': [1], 'value': [2]});
+        var rawView = anychart.data.set(rawData).mapAs({'System': 0, 'Availability': 2, 'x': 1, 'value': 2});
         var bulletScale = anychart.scales.linear().minimum(85).maximum(100);
         drawLegend('systemAvailabilityLegend', [
             {'index': 0, 'text': 'Actual', 'iconType': vRect, 'iconFill': '#1976d2'},
@@ -110,21 +110,23 @@
         var chart = anychart.cartesian();
         chart.palette(['#D6D6D6', '#B8B8B8', '#64b5f6']);
         chart.padding([5, 0, 0, 0]);
-        chart.crosshair().enabled(true).yLabel().enabled(false);
-        chart.crosshair().yStroke(null).xLabel().enabled(false);
-        chart.tooltip().positionMode('point');
-        chart.interactivity().hoverMode('byX');
+        chart.crosshair()
+            .enabled(true)
+            .yLabel(false)
+            .yStroke(null)
+            .xLabel(false);
+        chart.interactivity().hoverMode('by-x');
         chart.tooltip().displayMode('union');
 
         var series_1 = chart.line(sixMonthsData).name('Daily mean for last 6 month');
         series_1.legendItem({'iconType': vRect});
-        series_1.hoverMarkers(false);
+        series_1.hovered().markers(false);
         var series_2 = chart.line(weekData).name('Daily mean for last 7 days');
         series_2.legendItem({'iconType': vRect});
-        series_2.hoverMarkers(false);
+        series_2.hovered().markers(false);
         var series_3 = chart.line(yesterdayData).name('Yesterday');
         series_3.legendItem({'iconType': vRect});
-        series_3.hoverMarkers(false);
+        series_3.hovered().markers(false);
 
         var xAxisScale = anychart.scales.dateTime();
         xAxisScale.minimum(Date.UTC(0, 0, 1, 0));
@@ -133,13 +135,13 @@
         xAxisScale.minorTicks().interval(0, 0, 0, 1);
 
         var bottomAxis = chart.xAxis(0);
-        bottomAxis.scale(xAxisScale).staggerMode(false).overlapMode('allowOverlap');
-        bottomAxis.minorLabels().enabled(true).fontSize(10).textFormatter(function (value) {
+        bottomAxis.scale(xAxisScale).staggerMode(false).overlapMode('allow-overlap');
+        bottomAxis.minorLabels().enabled(true).fontSize(10).format(function (value) {
             var date = new Date(value['tickValue']);
             var h = date.getUTCHours() % 12;
             return h || 12;
         });
-        bottomAxis.labels().enabled(true).fontSize(10).textFormatter(function (value) {
+        bottomAxis.labels().enabled(true).fontSize(10).format(function (value) {
             var date = new Date(value['tickValue']);
             var hour = date.getUTCHours();
             var h = (hour % 12) || 12;
@@ -154,10 +156,10 @@
 
         chart.yScale().maximumGap(0).minimumGap(0);
         var leftAxis = chart.yAxis();
-        leftAxis.labels().fontSize(10).textFormatter(function (value) {
+        leftAxis.labels().fontSize(10).format(function (value) {
             return (value['tickValue'] / 1000).toFixed(0) + 'K';
         });
-        chart.grid().scale(xAxisScale).layout('vertical');
+        chart.xGrid().scale(xAxisScale);
         chart.legend().enabled(true).align('right').fontSize(11).itemsSpacing(2).iconTextSpacing(0);
         chart.container(container_id);
         chart.draw();
@@ -218,7 +220,7 @@
             bullet.container('majorProjectMilestonesBar' + i);
             bullet.draw();
         }
-        var axis = anychart.axes.linear();
+        var axis = anychart.standalones.axes.linear();
         axis.orientation('bottom');
         axis.labels().fontSize('9px').padding(0);
         axis.scale(bulletScale);
@@ -228,6 +230,7 @@
         axis.draw()
     }
 
+    anychart.theme({defaultTooltip: {allowLeaveStage: true}});
     fillSystemAvailabilityTable(SARawData, SAAcceptedAvailability);
     fillHardwareOfCapacityTable(HCCPUData, HCStorage, HCNetwork, HCCPURanges, HCNetworkRanges, HCStorageRanges);
     fillDailyNetworkTrafficChart('dailyNetworkTrafficChart', DNT6MonthAvgData, DNTWeekAvgData, DNTYesterdayData);
